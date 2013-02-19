@@ -26,8 +26,19 @@ git clone https://github.com/mriehl/pyb_init ~/pyb_init && echo "source ~/pyb_in
 ## Check out a project from GitHub and initialize it
 Simply run ```pyb_init GIT_URL```
 
+### Example
+```bash
+pyb_init https://github.com/aelgru/committer
+```
+
 ## Initialize an existing project
 When in the project root, run ```pyb_init```. That's it!
+
+### Example
+```bash
+cd project
+pyb_init
+```
 
 # Updating
 Just run a ```git pull``` in ~/pyb_init and re-source the script (or restart a shell..)
