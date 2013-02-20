@@ -3,16 +3,10 @@
 function pyb_init(){
 
     __show_pyb_init_usage
-
     __try_to_clone_git_repository_if_argument_present_and_go_inside $@ || return 1
-
-
     __fail_if_current_directory_is_not_a_pybuilder_project || return 1
-    
     __initialize_virtualenv || return 1
-
     __install_pybuilder || return 1
-
     pyb install_dependencies
 }
 
