@@ -38,6 +38,7 @@ function __try_to_clone_git_repository_if_argument_present_and_go_inside(){
         }
         cd `basename $GIT_URL`
     }
+    return 0
 }
 
 function __fail_if_current_directory_is_not_a_pybuilder_project(){
