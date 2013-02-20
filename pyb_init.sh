@@ -12,6 +12,7 @@ function pyb_init(){
 
 
 function __show_pyb_init_usage(){
+
     echo "Usage : pyb_init [GIT_URL]"
     echo "Either initialize the current working directory or clone a git project and initialize it instead."
     return 0
