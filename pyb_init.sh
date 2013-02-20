@@ -6,8 +6,6 @@ function pyb_init(){
 
     __try_to_clone_git_repository_if_argument_present_and_go_inside $@ || return 1
 
-    CURRENT_DIRECTORY=`pwd`
-    PATH_TO_EXPECTED_BUILD_PY_FILE="$CURRENT_DIRECTORY/build.py"
 
     __fail_if_current_directory_is_not_a_pybuilder_project || return 1
     
@@ -42,11 +40,15 @@ function __try_to_clone_git_repository_if_argument_present_and_go_inside(){
 }
 
 function __fail_if_current_directory_is_not_a_pybuilder_project(){
+
+    CURRENT_DIRECTORY=`pwd`
+    PATH_TO_EXPECTED_BUILD_PY_FILE="$CURRENT_DIRECTORY/build.py"
    
     [[ -f $PATH_TO_EXPECTED_BUILD_PY_FILE ]] || {
         echo "ERROR: Did not find a build descriptor (looked for $PATH_TO_EXPECTED_BUILD_PY_FILE)."
         return 1
     }
+    return 0
 }
 
 function __initialize_virtualenv(){
@@ -57,6 +59,7 @@ function __initialize_virtualenv(){
     }
 
     source venv/bin/activate
+    return 0
 }
 
 function __install_pybuilder(){
@@ -65,4 +68,5 @@ function __install_pybuilder(){
         echo "ERROR: Could not install pybuilder from PyPi.. maybe the cheeseshop is down?"
         return 1
     }
+    return 0
 }
