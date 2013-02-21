@@ -48,7 +48,7 @@ function __fail_if_current_directory_is_not_a_pybuilder_project(){
 
 function __initialize_virtualenv(){
 
-    virtualenv venv || {
+    virtualenv venv --clear || {
         echo "ERROR: Error while creating virtualenv, maybe python-virtualenv is not installed?"
         return 1
     }
