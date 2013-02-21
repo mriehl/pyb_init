@@ -7,7 +7,7 @@ function pyb_init(){
     __fail_if_current_directory_is_not_a_pybuilder_project || return 1
     __initialize_virtualenv || return 1
     __install_pybuilder || return 1
-    pyb install_dependencies
+    pyb install_dependencies && pyb
 }
 
 
@@ -21,7 +21,7 @@ function __show_pyb_init_usage(){
 function __try_to_clone_git_repository_if_argument_present_and_go_inside(){
 
     FIRST_ARGUMENT=$1
- 
+
     [[ ! -z "$FIRST_ARGUMENT" ]] && {
         GIT_URL=$FIRST_ARGUMENT
 
@@ -38,7 +38,7 @@ function __fail_if_current_directory_is_not_a_pybuilder_project(){
 
     CURRENT_DIRECTORY=`pwd`
     PATH_TO_EXPECTED_BUILD_PY_FILE="$CURRENT_DIRECTORY/build.py"
-   
+
     [[ -f $PATH_TO_EXPECTED_BUILD_PY_FILE ]] || {
         echo "ERROR: Did not find a build descriptor (looked for $PATH_TO_EXPECTED_BUILD_PY_FILE)."
         return 1
@@ -47,7 +47,7 @@ function __fail_if_current_directory_is_not_a_pybuilder_project(){
 }
 
 function __initialize_virtualenv(){
-    
+
     virtualenv venv || {
         echo "ERROR: Error while creating virtualenv, maybe python-virtualenv is not installed?"
         return 1
@@ -58,7 +58,7 @@ function __initialize_virtualenv(){
 }
 
 function __install_pybuilder(){
-    
+
     pip install pybuilder || {
         echo "ERROR: Could not install pybuilder from PyPi.. maybe the cheeseshop is down?"
         return 1
