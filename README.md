@@ -15,7 +15,7 @@ After checking out the project, you need to
 This script is an attempt at making these routine operations dead simple and time-efficient.
 
 On a sidenote, ```pyb_init``` will always create the virtualenv with the ```--clear``` flag. Thus it is suitable
-to always run ```pyb_init``` instead of ```pyb```. This will ensure you always have a clean virtual environment
+to always run ```pyb_init``` instead of ```pyb```. This will ensure you have a clean virtual environment
 with no unnecessary dependencies.
 
 # Installation
