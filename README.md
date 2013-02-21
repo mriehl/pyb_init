@@ -6,13 +6,17 @@ Short script to ease working with the awesome pythonbuilder.
 # What it does
 When using the [pythonbuilder](http://pybuilder.github.com), every project needs to be initialized.
 After checking out the project, you need to 
- - Create a virtual environment
- - Activate the virtual environment
- - Install the pythonbuilder in the virtual environment
- - Install the project dependencies in the virtual environment
-Only then you'll be able to build and test your project.
+ - Create a virtual environment.
+ - Activate the virtual environment.
+ - Install the pythonbuilder in the virtual environment.
+ - Install the project dependencies in the virtual environment.
+ - Run pyb to build and test your project.
 
 This script is an attempt at making these routine operations dead simple and time-efficient.
+
+On a sidenote, ```pyb_init``` will always create the virtualenv with the ```--clear``` flag. Thus it is suitable
+to always run ```pyb_init``` instead of ```pyb```. This will ensure you always have a clean virtual environment
+with no unnecessary dependencies.
 
 # Installation
 Copy/paste the following into a shell (read it first) :
