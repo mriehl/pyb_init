@@ -18,7 +18,7 @@ This script is an attempt at making these routine operations dead simple and tim
 Copy/paste the following into a shell (read it first) :
 
 ```bash
-git clone https://github.com/mriehl/pyb_init ~/pyb_init && echo "source ~/pyb_init/pyb_init.sh" >> ~/.bashrc
+git clone https://github.com/mriehl/pyb_init ./pyb_init && echo "source `pwd`/pyb_init/pyb_init.sh" >> ~/.bashrc
 ```
 
 # Usage
