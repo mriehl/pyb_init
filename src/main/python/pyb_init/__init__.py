@@ -1,3 +1,8 @@
+'''
+Usage: pyb_init
+
+-h --help    show this
+'''
 __version__ = '${version}'
 
 from docopt import docopt
