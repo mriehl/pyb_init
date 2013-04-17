@@ -25,6 +25,8 @@ default_task = ['analyze', 'publish']
 def set_properties(project):
     project.depends_on('docopt')
 
+    project.build_depends_on('mockito')
+
     project.get_property('filter_resources_glob').append('**/pyb_init/__init__.py')
     project.set_property('copy_resources_target', '$dir_dist')
     project.set_property('coverage_break_build', False)
