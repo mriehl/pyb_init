@@ -1,5 +1,5 @@
 '''
-Usage: pyb_init
+Usage: pyb-init
 
 -h --help    show this
 '''

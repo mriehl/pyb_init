@@ -1,0 +1,3 @@
+#!/bin/bash
+
+PYTHONPATH=src/main/python python src/main/scripts/pyb-init $@
