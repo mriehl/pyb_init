@@ -11,7 +11,6 @@ use_plugin('python.distutils')
 use_plugin('python.unittest')
 use_plugin('python.flake8')
 use_plugin('python.pydev')
-use_plugin('copy_resources')
 
 authors = [Author('Maximilien Riehl', 'maximilien.riehl@gmail.com')]
 license = 'WTFPL'
