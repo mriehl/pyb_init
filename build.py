@@ -16,7 +16,7 @@ authors = [Author('Maximilien Riehl', 'maximilien.riehl@gmail.com')]
 license = 'WTFPL'
 name = 'pyb_init'
 url = 'https://github.com/mriehl/pyb_init'
-version = '0.1.1'
+version = '0.1.2'
 
 default_task = ['analyze', 'publish']
 
