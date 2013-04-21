@@ -27,6 +27,7 @@ class ShellCommandTaskTests(unittest.TestCase):
         task = ShellCommandTask('ls -l')
         self.assertRaises(ShellCommandTaskException, task.execute)
 
+
 class ShellCommandTaskExceptionTests(unittest.TestCase):
     def test_should_represent_task_as_string(self):
         task = ShellCommandTaskException('Error message')
