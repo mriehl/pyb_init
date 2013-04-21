@@ -10,7 +10,7 @@ class ReactorTests(unittest.TestCase):
     def test_should_return_reactor_for_local_initialization(self):
         reactor = pyb_init.reactor.for_local_initialization()
         actual_tasks = reactor.get_tasks()
-        self.assertEqual(actual_tasks, [ShellCommandTask('virtualenv virtualenv'),
+        self.assertEqual(actual_tasks, [ShellCommandTask('virtualenv virtualenv --clear'),
                                         ShellCommandTask('source virtualenv/bin/activate && pip install pybuilder'),
                                         ShellCommandTask('source virtualenv/bin/activate && pyb install_dependencies'),
                                         ShellCommandTask('source virtualenv/bin/activate && pyb -v')
@@ -21,7 +21,7 @@ class ReactorTests(unittest.TestCase):
         actual_tasks = reactor.get_tasks()
 
         self.assertEqual(actual_tasks, [ShellCommandTask('git clone https://github.com/user/project'),
-                                        ShellCommandTask('cd project && virtualenv virtualenv'),
+                                        ShellCommandTask('cd project && virtualenv virtualenv --clear'),
                                         ShellCommandTask('cd project && source virtualenv/bin/activate && pip install pybuilder'),
                                         ShellCommandTask('cd project && source virtualenv/bin/activate && pyb install_dependencies'),
                                         ShellCommandTask('cd project && source virtualenv/bin/activate && pyb -v')
@@ -30,7 +30,7 @@ class ReactorTests(unittest.TestCase):
         reactor = TaskReactor()
         _add_common_tasks(virtualenv_name='venv', reactor=reactor, command_prefix=None)
 
-        self.assertEqual(reactor.get_tasks(), [ShellCommandTask('virtualenv venv'),
+        self.assertEqual(reactor.get_tasks(), [ShellCommandTask('virtualenv venv --clear'),
                                                ShellCommandTask('source venv/bin/activate && pip install pybuilder'),
                                                ShellCommandTask('source venv/bin/activate && pyb install_dependencies'),
                                                ShellCommandTask('source venv/bin/activate && pyb -v')])
@@ -39,7 +39,7 @@ class ReactorTests(unittest.TestCase):
         reactor = TaskReactor()
         _add_common_tasks(virtualenv_name='venv', reactor=reactor, command_prefix='wtf ')
 
-        self.assertEqual(reactor.get_tasks(), [ShellCommandTask('wtf virtualenv venv'),
+        self.assertEqual(reactor.get_tasks(), [ShellCommandTask('wtf virtualenv venv --clear'),
                                                ShellCommandTask('wtf source venv/bin/activate && pip install pybuilder'),
                                                ShellCommandTask('wtf source venv/bin/activate && pyb install_dependencies'),
                                                ShellCommandTask('wtf source venv/bin/activate && pyb -v')])

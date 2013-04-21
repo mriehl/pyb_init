@@ -17,7 +17,7 @@ def for_github_clone(user, project):
 
 
 def _add_common_tasks(virtualenv_name, reactor, command_prefix):
-    commands = ['virtualenv {0}'.format(virtualenv_name),
+    commands = ['virtualenv {0} --clear'.format(virtualenv_name),
                 'source {0}/bin/activate && pip install pybuilder'.format(virtualenv_name),
                 'source {0}/bin/activate && pyb install_dependencies'.format(virtualenv_name),
                 'source {0}/bin/activate && pyb -v'.format(virtualenv_name)]
