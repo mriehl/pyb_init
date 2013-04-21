@@ -23,12 +23,27 @@ sudo pip install pyb-init
 # Usage
 
 ## Check out a project from GitHub and initialize it
-Simply run ```pyb-init github user : project```.
-For instance : ```pyb-init github aelgru : committer```
+Simply run 
+```bash
+pyb-init github user : project
+```
+For instance : 
+```bash
+pyb-init github aelgru : committer
+```
 
 ## Check out a git project and initialize it
-Run ```pyb-init git GIT_URL```.
-For instance : ```pyb-init git https://github.com/aelgru/committer```
+Run 
+```bash
+pyb-init git GIT_URL
+```
+For instance : 
+```bash
+pyb-init git https://github.com/aelgru/committer
+```
 
 ## Initialize an existing project
-When in the project root, run ```pyb-init local```. That's it!
+When in the project root, run 
+```bash
+pyb-init local
+```
