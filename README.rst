@@ -1,0 +1,52 @@
+pyb\_init
+=========
+
+`|Build Status| <https://travis-ci.org/mriehl/pyb_init>`_
+
+Short script to ease working with the awesome pybuilder.
+
+What it does
+============
+
+When using the `pybuilder <http://pybuilder.github.com>`_, every project
+needs to be initialized. After checking out the project, you need to -
+Create a virtual environment. - Activate the virtual environment. -
+Install the pybuilder in the virtual environment. - Install the project
+dependencies in the virtual environment. - Run pyb to build and test
+your project.
+
+This program is an attempt at making these routine operations dead
+simple and time-efficient.
+
+Installation
+============
+
+::
+
+    sudo pip install pyb-init
+
+Checkout from GitHub
+====================
+
+::
+
+    pyb-init github user : project
+
+Git checkout
+============
+
+::
+
+    pyb-init git GIT_URL
+
+Initialization from local project
+=================================
+
+When in the project root, run
+
+::
+
+    pyb-init local
+
+.. |Build
+Status| image:: https://travis-ci.org/mriehl/pyb_init.png?branch=master

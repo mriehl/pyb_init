@@ -17,33 +17,25 @@ After checking out the project, you need to
 This program is an attempt at making these routine operations dead simple and time-efficient.
 
 # Installation
-```bash
+```
 sudo pip install pyb-init
 ```
-# Usage
 
-## Check out a project from GitHub and initialize it
-Simply run 
-```bash
+# Checkout from GitHub
+
+```
 pyb-init github user : project
 ```
-For instance : 
-```bash
-pyb-init github aelgru : committer
-```
 
-## Check out a git project and initialize it
-Run 
-```bash
+# Git checkout
+```
 pyb-init git GIT_URL
 ```
-For instance : 
-```bash
-pyb-init git https://github.com/aelgru/committer
-```
 
-## Initialize an existing project
-When in the project root, run 
-```bash
+# Initialization from local project
+When in the project root, run
+
+
+```
 pyb-init local
 ```
