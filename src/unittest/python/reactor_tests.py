@@ -29,7 +29,8 @@ class ReactorTests(unittest.TestCase):
                                         ShellCommandTask('cd project && source virtualenv/bin/activate && pyb install_dependencies'),
                                         ShellCommandTask('cd project && source virtualenv/bin/activate && pyb -v')
                                         ])
-    def test_should_add_common_tasks_should_add_commands_when_no_prefix_is_given(self):
+
+    def test_add_common_tasks_should_add_only_commands_when_no_prefix_is_given(self):
         when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
         reactor = TaskReactor()
         _add_common_tasks(virtualenv_name='venv', reactor=reactor, command_prefix=None)
@@ -39,7 +40,7 @@ class ReactorTests(unittest.TestCase):
                                                ShellCommandTask('source venv/bin/activate && pyb install_dependencies'),
                                                ShellCommandTask('source venv/bin/activate && pyb -v')])
 
-    def test_should_add_common_tasks_should_add_prefixed_commands_when_prefix_is_given(self):
+    def test_add_common_tasks_should_add_prefixed_commands_when_prefix_is_given(self):
         reactor = TaskReactor()
         _add_common_tasks(virtualenv_name='venv', reactor=reactor, command_prefix='wtf ')
 
