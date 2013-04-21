@@ -9,11 +9,13 @@ What it does
 ============
 
 When using the `pybuilder <http://pybuilder.github.com>`_, every project
-needs to be initialized. After checking out the project, you need to -
-Create a virtual environment. - Activate the virtual environment. -
-Install the pybuilder in the virtual environment. - Install the project
-dependencies in the virtual environment. - Run pyb to build and test
-your project.
+needs to be initialized. After checking out the project, you need to
+
+-  Create a virtual environment.
+-  Activate the virtual environment.
+-  Install the pybuilder in the virtual environment.
+-  Install the project dependencies in the virtual environment.
+-  Run pyb to build and test your project.
 
 This program is an attempt at making these routine operations dead
 simple and time-efficient.
