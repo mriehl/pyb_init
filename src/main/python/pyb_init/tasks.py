@@ -10,7 +10,7 @@ class PreconditionTask(object):
 
     def execute(self):
         if self.precondition_callback() is False:
-            raise PreconditionNotFulfilledException('Precondition {0} not met.'.format(self.description))
+            raise PreconditionNotFulfilledException('Precondition "{0}" not met.'.format(self.description))
 
     def __eq__(self, other_precondition_task):
         return self.description == other_precondition_task.description
