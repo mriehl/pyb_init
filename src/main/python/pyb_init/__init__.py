@@ -2,6 +2,7 @@
 Usage:
 pyb-init local
 pyb-init github <user> : <project>
+pyb-init git <git_url>
 
 -h --help    show this
 '''
@@ -20,6 +21,8 @@ def entry_point():
     if parsed_command_line['github']:
         task_reactor = reactor.for_github_clone(user=parsed_command_line['<user>'],
                                                 project=parsed_command_line['<project>'])
+    if parsed_command_line['git']:
+        task_reactor = reactor.for_git_clone(git_url=parsed_command_line['<git_url>'])
 
     for task in task_reactor.get_tasks():
         task.execute()

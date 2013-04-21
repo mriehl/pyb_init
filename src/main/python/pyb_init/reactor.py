@@ -2,6 +2,7 @@ from __future__ import absolute_import
 import os
 
 from pyb_init.tasks import ShellCommandTask, PreconditionTask
+from pyb_init.vcs_tools import determine_project_name_from_git_url
 
 VIRTUALENV_NAME = 'virtualenv'
 
@@ -15,6 +16,17 @@ def for_local_initialization():
 def for_github_clone(user, project):
     reactor = TaskReactor()
     reactor.add_task(ShellCommandTask('git clone https://github.com/{0}/{1}'.format(user, project)))
+    _add_common_tasks(virtualenv_name=VIRTUALENV_NAME,
+                      reactor=reactor,
+                      command_prefix='cd {0} && '.format(project),
+                      project=project)
+    return reactor
+
+
+def for_git_clone(git_url):
+    reactor = TaskReactor()
+    reactor.add_task(ShellCommandTask('git clone {0}'.format(git_url)))
+    project = determine_project_name_from_git_url(git_url)
     _add_common_tasks(virtualenv_name=VIRTUALENV_NAME,
                       reactor=reactor,
                       command_prefix='cd {0} && '.format(project),

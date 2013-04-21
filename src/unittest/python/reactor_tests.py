@@ -30,6 +30,19 @@ class ReactorTests(unittest.TestCase):
                                         ShellCommandTask('cd project && source virtualenv/bin/activate && pyb -v')
                                         ])
 
+    def test_should_return_reactor_for_git_clone(self):
+        when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
+        when(pyb_init.reactor).determine_project_name_from_git_url(any_value()).thenReturn('test')
+        reactor = pyb_init.reactor.for_git_clone(git_url='https://git/test.git')
+        actual_tasks = reactor.get_tasks()
+
+        self.assertEqual(actual_tasks, [ShellCommandTask('git clone https://git/test.git'),
+                                        ShellCommandTask('cd test && virtualenv virtualenv --clear'),
+                                        ShellCommandTask('cd test && source virtualenv/bin/activate && pip install pybuilder'),
+                                        ShellCommandTask('cd test && source virtualenv/bin/activate && pyb install_dependencies'),
+                                        ShellCommandTask('cd test && source virtualenv/bin/activate && pyb -v')
+                                        ])
+
     def test_add_common_tasks_should_add_only_commands_when_no_prefix_is_given(self):
         when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
         reactor = TaskReactor()
