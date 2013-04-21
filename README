@@ -1,7 +1,5 @@
-pyb\_init
-=========
-
-`|Build Status| <https://travis-ci.org/mriehl/pyb_init>`_
+pyb init
+========
 
 Short script to ease working with the awesome pybuilder.
 
@@ -49,6 +47,3 @@ When in the project root, run
 ::
 
     pyb-init local
-
-.. |Build
-Status| image:: https://travis-ci.org/mriehl/pyb_init.png?branch=master
