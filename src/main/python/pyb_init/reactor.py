@@ -14,13 +14,8 @@ def for_local_initialization():
 
 
 def for_github_clone(user, project):
-    reactor = TaskReactor()
-    reactor.add_task(ShellCommandTask('git clone https://github.com/{0}/{1}'.format(user, project)))
-    _add_common_tasks(virtualenv_name=VIRTUALENV_NAME,
-                      reactor=reactor,
-                      command_prefix='cd {0} && '.format(project),
-                      project=project)
-    return reactor
+    git_url = 'https://github.com/{0}/{1}'.format(user, project)
+    return for_git_clone(git_url)
 
 
 def for_git_clone(git_url):
