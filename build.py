@@ -16,7 +16,8 @@ authors = [Author('Maximilien Riehl', 'maximilien.riehl@gmail.com')]
 license = 'WTFPL'
 name = 'pyb_init'
 url = 'https://github.com/mriehl/pyb_init'
-version = '0.1.2'
+summary = 'pybuilder project initialization'
+version = '0.1.3'
 
 default_task = ['analyze', 'publish']
 
@@ -30,5 +31,12 @@ def set_properties(project):
 
     project.get_property('filter_resources_glob').append('**/pyb_init/__init__.py')
     project.set_property('copy_resources_target', '$dir_dist')
-    project.set_property('coverage_break_build', False)
-
+    project.set_property('coverage_break_build', True)
+    project.set_property('distutils_classifiers', [
+          'Development Status :: 4 - Beta',
+          'Intended Audience :: Developers',
+          'License :: Freely Distributable',
+          'Programming Language :: Python',
+          'Natural Language :: English',
+          'Operating System :: Unix',
+          'Topic :: Software Development :: Build Tools'])
