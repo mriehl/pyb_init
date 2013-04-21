@@ -14,7 +14,7 @@ After checking out the project, you need to
  - Install the project dependencies in the virtual environment.
  - Run pyb to build and test your project.
 
-This script is an attempt at making these routine operations dead simple and time-efficient.
+This program is an attempt at making these routine operations dead simple and time-efficient.
 
 # Installation
 ```bash
