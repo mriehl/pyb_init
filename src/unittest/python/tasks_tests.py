@@ -4,7 +4,8 @@ from mockito import when, verify, any as any_value, unstub, mock
 
 import pyb_init
 from pyb_init import tasks
-from pyb_init.tasks import ShellCommandTask, ShellCommandTaskException
+from pyb_init.tasks import ShellCommandTask, ShellCommandTaskException, PreconditionTask, PreconditionNotFulfilledException
+
 
 class ShellCommandTaskTests(unittest.TestCase):
 
@@ -28,6 +29,24 @@ class ShellCommandTaskTests(unittest.TestCase):
 
         task = ShellCommandTask('ls -l')
         self.assertRaises(ShellCommandTaskException, task.execute)
+
+
+class PreconditionTaskTests(unittest.TestCase):
+
+    def test_should_succeed_when_precondition_is_true(self):
+        precondition = PreconditionTask(lambda: True, 'Always succeeds')
+        precondition.execute()
+
+    def test_should_fail_when_precondition_is_false(self):
+        precondition = PreconditionTask(lambda: False, 'Always fails')
+        self.assertRaises(PreconditionNotFulfilledException, precondition.execute)
+
+
+class PreconditionNotFulfilledExceptionTests(unittest.TestCase):
+    def test_should_represent_precondition_as_string(self):
+        precondition = PreconditionNotFulfilledException('Precondition failed')
+
+        self.assertEqual(str(precondition), 'Precondition failed')
 
 
 class ShellCommandTaskExceptionTests(unittest.TestCase):

@@ -1,5 +1,7 @@
 from __future__ import absolute_import
-from pyb_init.tasks import ShellCommandTask
+import os
+
+from pyb_init.tasks import ShellCommandTask, PreconditionTask
 
 VIRTUALENV_NAME = 'virtualenv'
 
@@ -13,11 +15,15 @@ def for_local_initialization():
 def for_github_clone(user, project):
     reactor = TaskReactor()
     reactor.add_task(ShellCommandTask('git clone https://github.com/{0}/{1}'.format(user, project)))
-    _add_common_tasks(virtualenv_name=VIRTUALENV_NAME, reactor=reactor, command_prefix='cd {0} && '.format(project))
+    _add_common_tasks(virtualenv_name=VIRTUALENV_NAME,
+                      reactor=reactor,
+                      command_prefix='cd {0} && '.format(project),
+                      project=project)
     return reactor
 
 
-def _add_common_tasks(virtualenv_name, reactor, command_prefix):
+def _add_common_tasks(virtualenv_name, reactor, command_prefix, project=None):
+    _add_preconditions(reactor, project)
     commands = ['virtualenv {0} --clear'.format(virtualenv_name),
                 'source {0}/bin/activate && pip install pybuilder'.format(virtualenv_name),
                 'source {0}/bin/activate && pyb install_dependencies'.format(virtualenv_name),
@@ -29,6 +35,15 @@ def _add_common_tasks(virtualenv_name, reactor, command_prefix):
         expanded_commands = commands
     for command in expanded_commands:
         reactor.add_task(ShellCommandTask(command))
+
+
+def _add_preconditions(reactor, project):
+    if project:
+        reactor.add_task(PreconditionTask(lambda: os.path.exists('{0}/build.py'.format(project)),
+                                          'Build descriptor ({0}/build.py) should exist'.format(project)))
+    else:
+        reactor.add_task(PreconditionTask(lambda: os.path.exists('build.py'),
+                                          'Build descriptor (build.py) should exist'))
 
 
 class TaskReactor(object):

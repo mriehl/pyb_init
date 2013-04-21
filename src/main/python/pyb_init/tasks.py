@@ -3,6 +3,19 @@ import subprocess
 import sys
 
 
+class PreconditionTask(object):
+    def __init__(self, precondition_callback, description):
+        self.precondition_callback = precondition_callback
+        self.description = description
+
+    def execute(self):
+        if self.precondition_callback() is False:
+            raise PreconditionNotFulfilledException('Precondition {0} not met.'.format(self.description))
+
+    def __eq__(self, other_precondition_task):
+        return self.description == other_precondition_task.description
+
+
 class ShellCommandTask(object):
 
     def __init__(self, shell_command):
@@ -19,6 +32,14 @@ class ShellCommandTask(object):
 
 
 class ShellCommandTaskException(RuntimeError):
+    def __init__(self, message):
+        self.message = message
+
+    def __str__(self):
+        return self.message
+
+
+class PreconditionNotFulfilledException(ValueError):
     def __init__(self, message):
         self.message = message
 
