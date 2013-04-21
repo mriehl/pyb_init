@@ -18,17 +18,19 @@ class PreconditionTask(object):
 
 class ShellCommandTask(object):
 
-    def __init__(self, shell_command):
+    def __init__(self, shell_command, ignore_failures=False):
         self.shell_command = shell_command
+        self.ignore_failures = ignore_failures
 
     def __eq__(self, other_shell_command_task):
         return self.shell_command == other_shell_command_task.shell_command
 
     def execute(self):
         call_result = subprocess.call(self.shell_command, stderr=sys.stderr, stdout=sys.stdout, shell=True)
-        if call_result != 0:
+        if call_result != 0 and not self.ignore_failures:
             raise ShellCommandTaskException('Call "{0}" exited with nonzero value {1}.'.format(self.shell_command,
                                                                                                call_result))
+        return call_result
 
 
 class ShellCommandTaskException(RuntimeError):

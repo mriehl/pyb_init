@@ -57,6 +57,11 @@ def _add_preconditions(reactor, project):
         reactor.add_task(PreconditionTask(lambda: os.path.exists('build.py'),
                                           'Build descriptor (build.py) should exist'))
 
+    virtualenv_installed_if_0 = ShellCommandTask('command -v virtualenv', ignore_failures=True).execute
+    reactor.add_task(PreconditionTask(
+        lambda: virtualenv_installed_if_0() == 0,
+        'Virtualenv should be installed and callable'))
+
 
 class TaskReactor(object):
 
