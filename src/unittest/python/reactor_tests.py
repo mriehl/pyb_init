@@ -66,10 +66,13 @@ class ReactorTests(unittest.TestCase):
         reactor = TaskReactor()
         _add_preconditions(reactor, None)
 
-        self.assertEqual(reactor.get_tasks(), [PreconditionTask(lambda: os.path.exists('build.py'), 'Build descriptor (build.py) should exist')])
+        self.assertEqual(reactor.get_tasks(), [PreconditionTask(lambda: os.path.exists('build.py'), 'Build descriptor (build.py) should exist'),
+                                               PreconditionTask(lambda: None, 'Virtualenv should be installed and callable')])
 
     def test_should_add_preconditions_on_foreign_project(self):
         reactor = TaskReactor()
         _add_preconditions(reactor, 'project')
 
-        self.assertEqual(reactor.get_tasks(), [PreconditionTask(lambda: os.path.exists('project/build.py'), 'Build descriptor (project/build.py) should exist')])
+        self.assertEqual(reactor.get_tasks(), [
+                                                PreconditionTask(lambda: os.path.exists('project/build.py'), 'Build descriptor (project/build.py) should exist'),
+                                                PreconditionTask(lambda: None, 'Virtualenv should be installed and callable')])
