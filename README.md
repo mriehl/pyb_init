@@ -17,13 +17,14 @@ After checking out the project, you need to
 This script is an attempt at making these routine operations dead simple and time-efficient.
 
 # Installation
+```bash
 sudo pip install pyb-init
-
+```
 # Usage
 
 ## Check out a project from GitHub and initialize it
 Simply run ```pyb-init github user : project```
-For instance : pyb-init github aelgru : committer
+For instance : ```pyb-init github aelgru : committer```
 
 
 ## Initialize an existing project
