@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 import unittest
 from mockito import when, verify, any as any_value, unstub, mock
+from mock import patch, call
 
 import pyb_init
 from pyb_init import tasks
@@ -16,13 +17,13 @@ class ShellCommandTaskTests(unittest.TestCase):
         task = ShellCommandTask('echo true')
         self.assertEqual(task.shell_command, 'echo true')
 
-    def test_should_run_task_as_shell_command(self):
-        when(pyb_init.tasks.subprocess).call(any_value(), stderr=any_value(), stdout=any_value(), shell=any_value()).thenReturn(0)
-
+    @patch('pyb_init.tasks.subprocess.call')
+    def test_should_run_task_as_shell_command(self, mock_call):
+        mock_call.return_value = 0
         task = ShellCommandTask('ls -l')
         task.execute()
 
-        verify(pyb_init.tasks.subprocess).call('ls -l', stderr=tasks.sys.stderr, stdout=tasks.sys.stdout, shell=True)
+        self.assertEqual(call('ls -l', shell=True, stderr=tasks.sys.stderr, stdout=tasks.sys.stdout), mock_call.call_args)
 
     def test_should_raise_exception_when_shell_call_fails(self):
         when(pyb_init.tasks.subprocess).call(any_value(), stderr=any_value(), stdout=any_value(), shell=any_value()).thenReturn(5)
