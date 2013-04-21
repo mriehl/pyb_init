@@ -8,6 +8,9 @@ from pyb_init.reactor import _add_common_tasks, TaskReactor, _add_preconditions
 
 class ReactorTests(unittest.TestCase):
 
+    def tearDown(self):
+        unstub()
+
     def test_should_return_reactor_for_local_initialization(self):
         when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
         reactor = pyb_init.reactor.for_local_initialization()
@@ -20,14 +23,14 @@ class ReactorTests(unittest.TestCase):
 
     def test_should_return_reactor_for_github_clone(self):
         when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
-        reactor = pyb_init.reactor.for_github_clone(user='user', project='project')
+        reactor = pyb_init.reactor.for_github_clone(user='user1', project='project1')
         actual_tasks = reactor.get_tasks()
 
-        self.assertEqual(actual_tasks, [ShellCommandTask('git clone https://github.com/user/project'),
-                                        ShellCommandTask('cd project && virtualenv virtualenv --clear'),
-                                        ShellCommandTask('cd project && source virtualenv/bin/activate && pip install pybuilder'),
-                                        ShellCommandTask('cd project && source virtualenv/bin/activate && pyb install_dependencies'),
-                                        ShellCommandTask('cd project && source virtualenv/bin/activate && pyb -v')
+        self.assertEqual(actual_tasks, [ShellCommandTask('git clone https://github.com/user1/project1'),
+                                        ShellCommandTask('cd project1 && virtualenv virtualenv --clear'),
+                                        ShellCommandTask('cd project1 && source virtualenv/bin/activate && pip install pybuilder'),
+                                        ShellCommandTask('cd project1 && source virtualenv/bin/activate && pyb install_dependencies'),
+                                        ShellCommandTask('cd project1 && source virtualenv/bin/activate && pyb -v')
                                         ])
 
     def test_should_return_reactor_for_git_clone(self):
@@ -54,6 +57,7 @@ class ReactorTests(unittest.TestCase):
                                                ShellCommandTask('source venv/bin/activate && pyb -v')])
 
     def test_add_common_tasks_should_add_prefixed_commands_when_prefix_is_given(self):
+        when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
         reactor = TaskReactor()
         _add_common_tasks(virtualenv_name='venv', reactor=reactor, command_prefix='wtf ')
 

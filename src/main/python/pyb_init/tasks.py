@@ -25,6 +25,9 @@ class ShellCommandTask(object):
     def __eq__(self, other_shell_command_task):
         return self.shell_command == other_shell_command_task.shell_command
 
+    def __str__(self):
+        return self.shell_command
+
     def execute(self):
         call_result = subprocess.call(self.shell_command, stderr=sys.stderr, stdout=sys.stdout, shell=True)
         if call_result != 0 and not self.ignore_failures:

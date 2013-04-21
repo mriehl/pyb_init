@@ -31,6 +31,11 @@ class ShellCommandTaskTests(unittest.TestCase):
         task = ShellCommandTask('ls -l')
         self.assertRaises(ShellCommandTaskException, task.execute)
 
+    def test_should_represent_task_as_command(self):
+        task = ShellCommandTask('ls -l')
+
+        self.assertEqual('ls -l', str(task))
+
 
 class PreconditionTaskTests(unittest.TestCase):
 
