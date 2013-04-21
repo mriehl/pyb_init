@@ -23,10 +23,10 @@ def _add_common_tasks(virtualenv_name, reactor, command_prefix):
                 'source {0}/bin/activate && pyb -v'.format(virtualenv_name)]
 
     if command_prefix:
-        final_commands = [command_prefix + command for command in commands]
+        expanded_commands = [command_prefix + command for command in commands]
     else:
-        final_commands = commands
-    for command in final_commands:
+        expanded_commands = commands
+    for command in expanded_commands:
         reactor.add_task(ShellCommandTask(command))
 
 
