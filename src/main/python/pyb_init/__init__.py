@@ -5,6 +5,7 @@ pyb-init github <user> : <project>
 
 -h --help    show this
 '''
+from __future__ import absolute_import
 __version__ = '${version}'
 
 from docopt import docopt

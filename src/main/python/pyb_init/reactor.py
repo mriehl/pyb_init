@@ -1,4 +1,5 @@
-from tasks import ShellCommandTask
+from __future__ import absolute_import
+from pyb_init.tasks import ShellCommandTask
 
 VIRTUALENV_NAME = 'virtualenv'
 

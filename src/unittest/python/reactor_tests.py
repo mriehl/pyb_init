@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import unittest
 from mockito import when, verify, any as any_value, unstub
 
