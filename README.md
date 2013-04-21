@@ -1,3 +1,5 @@
+![Build Status](https://travis-ci.org/mriehl/pyb_init.png?branch=master)
+
 pyb init
 ========
 
