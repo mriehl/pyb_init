@@ -25,7 +25,7 @@ pyb-init (-h | --help)
 
 Options:
 -h --help             Show this screen.
---virtualenv=<name>   Override the virtualenv name [default: virtualenv]
+--virtualenv=<name>   Override the virtualenv name [default: venv]
 '''
 from __future__ import absolute_import
 __version__ = '${version}'
