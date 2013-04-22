@@ -68,22 +68,22 @@ class ReactorTests(unittest.TestCase):
     def test_add_common_tasks_should_add_only_commands_when_no_prefix_is_given(self):
         when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
         reactor = TaskReactor()
-        _add_common_tasks(virtualenv_name='venv', reactor=reactor, command_prefix=None)
+        _add_common_tasks(reactor=reactor, command_prefix=None)
 
-        self.assertEqual(reactor.get_tasks(), [ShellCommandTask('virtualenv venv --clear'),
-                                               ShellCommandTask('source venv/bin/activate && pip install pybuilder'),
-                                               ShellCommandTask('source venv/bin/activate && pyb install_dependencies'),
-                                               ShellCommandTask('source venv/bin/activate && pyb -v')])
+        self.assertEqual(reactor.get_tasks(), [ShellCommandTask('virtualenv virtualenv --clear'),
+                                               ShellCommandTask('source virtualenv/bin/activate && pip install pybuilder'),
+                                               ShellCommandTask('source virtualenv/bin/activate && pyb install_dependencies'),
+                                               ShellCommandTask('source virtualenv/bin/activate && pyb -v')])
 
     def test_add_common_tasks_should_add_prefixed_commands_when_prefix_is_given(self):
         when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
         reactor = TaskReactor()
-        _add_common_tasks(virtualenv_name='venv', reactor=reactor, command_prefix='wtf ')
+        _add_common_tasks(reactor=reactor, command_prefix='wtf ')
 
-        self.assertEqual(reactor.get_tasks(), [ShellCommandTask('wtf virtualenv venv --clear'),
-                                               ShellCommandTask('wtf source venv/bin/activate && pip install pybuilder'),
-                                               ShellCommandTask('wtf source venv/bin/activate && pyb install_dependencies'),
-                                               ShellCommandTask('wtf source venv/bin/activate && pyb -v')])
+        self.assertEqual(reactor.get_tasks(), [ShellCommandTask('wtf virtualenv virtualenv --clear'),
+                                               ShellCommandTask('wtf source virtualenv/bin/activate && pip install pybuilder'),
+                                               ShellCommandTask('wtf source virtualenv/bin/activate && pyb install_dependencies'),
+                                               ShellCommandTask('wtf source virtualenv/bin/activate && pyb -v')])
 
     def test_should_add_preconditions_on_local_project(self):
         reactor = TaskReactor()

@@ -27,7 +27,7 @@ VIRTUALENV_NAME = 'virtualenv'
 
 def for_local_initialization():
     reactor = TaskReactor()
-    _add_common_tasks(virtualenv_name=VIRTUALENV_NAME, reactor=reactor, command_prefix=None)
+    _add_common_tasks(reactor=reactor, command_prefix=None)
     return reactor
 
 
@@ -40,19 +40,18 @@ def for_git_clone(git_url):
     reactor = TaskReactor()
     reactor.add_task(ShellCommandTask('git clone {0}'.format(git_url)))
     project = determine_project_name_from_git_url(git_url)
-    _add_common_tasks(virtualenv_name=VIRTUALENV_NAME,
-                      reactor=reactor,
+    _add_common_tasks(reactor=reactor,
                       command_prefix='cd {0} && '.format(project),
                       project=project)
     return reactor
 
 
-def _add_common_tasks(virtualenv_name, reactor, command_prefix, project=None):
+def _add_common_tasks(reactor, command_prefix, project=None):
     _add_preconditions(reactor, project)
-    commands = ['virtualenv {0} --clear'.format(virtualenv_name),
-                'source {0}/bin/activate && pip install pybuilder'.format(virtualenv_name),
-                'source {0}/bin/activate && pyb install_dependencies'.format(virtualenv_name),
-                'source {0}/bin/activate && pyb -v'.format(virtualenv_name)]
+    commands = ['virtualenv {0} --clear'.format(VIRTUALENV_NAME),
+                'source {0}/bin/activate && pip install pybuilder'.format(VIRTUALENV_NAME),
+                'source {0}/bin/activate && pyb install_dependencies'.format(VIRTUALENV_NAME),
+                'source {0}/bin/activate && pyb -v'.format(VIRTUALENV_NAME)]
 
     if command_prefix:
         expanded_commands = [command_prefix + command for command in commands]
