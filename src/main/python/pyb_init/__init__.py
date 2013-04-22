@@ -37,7 +37,7 @@ from pyb_init.configuration import set_configuration
 
 def entry_point():
     parsed_command_line = docopt(doc=__doc__, version=__version__)
-    set_configuration(virtualenv_name=parsed_command_line['<virtualenv>'])
+    set_configuration(virtualenv_name=parsed_command_line['--virtualenv'])
     task_reactor = None
     if parsed_command_line['local']:
         task_reactor = reactor.for_local_initialization()
