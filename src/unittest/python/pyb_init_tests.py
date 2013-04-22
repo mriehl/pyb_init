@@ -43,7 +43,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
-                                                                                '<virtualenv>': 'virtualenv'})
+                                                                                '--virtualenv': 'virtualenv'})
 
         entry_point()
 
@@ -53,7 +53,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
-                                                                                '<virtualenv>': 'virtualenv'})
+                                                                                '--virtualenv': 'virtualenv'})
 
         entry_point()
 
@@ -65,7 +65,7 @@ class PybInitTests(unittest.TestCase):
                                                                                 'github': True,
                                                                                 '<user>': 'coder1234',
                                                                                 '<project>': 'committer',
-                                                                                '<virtualenv>': 'virtualenv'})
+                                                                                '--virtualenv': 'virtualenv'})
 
         entry_point()
 
@@ -76,7 +76,7 @@ class PybInitTests(unittest.TestCase):
                                                                                 'github': False,
                                                                                 'git': True,
                                                                                 '<git_url>': 'foo',
-                                                                                '<virtualenv>': 'virtualenv'})
+                                                                                '--virtualenv': 'virtualenv'})
 
         entry_point()
 
@@ -86,7 +86,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
-                                                                                '<virtualenv>': 'virtualenv'})
+                                                                                '--virtualenv': 'virtualenv'})
         mock_reactor = mock()
         mock_task_1 = mock()
         mock_task_2 = mock()
@@ -102,7 +102,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
-                                                                                '<virtualenv>': 'foobar'})
+                                                                                '--virtualenv': 'foobar'})
 
         entry_point()
 
