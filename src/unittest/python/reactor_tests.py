@@ -24,11 +24,15 @@ from mockito import when, verify, any as any_value, unstub
 import pyb_init
 from pyb_init.tasks import ShellCommandTask, PreconditionTask
 from pyb_init.reactor import _add_common_tasks, TaskReactor, _add_preconditions
+from pyb_init.configuration import configuration, set_configuration
 
 class ReactorTests(unittest.TestCase):
 
     def tearDown(self):
         unstub()
+
+    def setUp(self):
+        set_configuration(virtualenv_name='virtualenv')
 
     def test_should_return_reactor_for_local_initialization(self):
         when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
@@ -74,6 +78,19 @@ class ReactorTests(unittest.TestCase):
                                                ShellCommandTask('source virtualenv/bin/activate && pip install pybuilder'),
                                                ShellCommandTask('source virtualenv/bin/activate && pyb install_dependencies'),
                                                ShellCommandTask('source virtualenv/bin/activate && pyb -v')])
+
+
+    def test_add_common_tasks_should_respect_configured_virtualenv_name(self):
+        when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
+        reactor = TaskReactor()
+
+        set_configuration(virtualenv_name='foobar')
+        _add_common_tasks(reactor=reactor, command_prefix=None)
+
+        self.assertEqual(reactor.get_tasks(), [ShellCommandTask('virtualenv foobar --clear'),
+                                               ShellCommandTask('source foobar/bin/activate && pip install pybuilder'),
+                                               ShellCommandTask('source foobar/bin/activate && pyb install_dependencies'),
+                                               ShellCommandTask('source foobar/bin/activate && pyb -v')])
 
     def test_add_common_tasks_should_add_prefixed_commands_when_prefix_is_given(self):
         when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)

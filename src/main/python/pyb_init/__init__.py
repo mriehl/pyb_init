@@ -18,21 +18,26 @@
 
 '''
 Usage:
-pyb-init local
-pyb-init github <user> : <project>
-pyb-init git <git_url>
+pyb-init local [options]
+pyb-init github <user> : <project> [options]
+pyb-init git <git_url> [options]
+pyb-init (-h | --help)
 
--h --help    show this
+Options:
+-h --help             Show this screen.
+--virtualenv=<name>   Override the virtualenv name [default: virtualenv]
 '''
 from __future__ import absolute_import
 __version__ = '${version}'
 
 from docopt import docopt
 from pyb_init import reactor
+from pyb_init.configuration import set_configuration
 
 
 def entry_point():
     parsed_command_line = docopt(doc=__doc__, version=__version__)
+    set_configuration(virtualenv_name=parsed_command_line['<virtualenv>'])
     task_reactor = None
     if parsed_command_line['local']:
         task_reactor = reactor.for_local_initialization()

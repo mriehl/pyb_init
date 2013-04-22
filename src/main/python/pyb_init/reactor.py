@@ -21,8 +21,7 @@ import os
 
 from pyb_init.tasks import ShellCommandTask, PreconditionTask
 from pyb_init.vcs_tools import determine_project_name_from_git_url
-
-VIRTUALENV_NAME = 'virtualenv'
+from pyb_init.configuration import configuration
 
 
 def for_local_initialization():
@@ -47,11 +46,12 @@ def for_git_clone(git_url):
 
 
 def _add_common_tasks(reactor, command_prefix, project=None):
+    virtualenv_name = configuration['virtualenv_name']
     _add_preconditions(reactor, project)
-    commands = ['virtualenv {0} --clear'.format(VIRTUALENV_NAME),
-                'source {0}/bin/activate && pip install pybuilder'.format(VIRTUALENV_NAME),
-                'source {0}/bin/activate && pyb install_dependencies'.format(VIRTUALENV_NAME),
-                'source {0}/bin/activate && pyb -v'.format(VIRTUALENV_NAME)]
+    commands = ['virtualenv {0} --clear'.format(virtualenv_name),
+                'source {0}/bin/activate && pip install pybuilder'.format(virtualenv_name),
+                'source {0}/bin/activate && pyb install_dependencies'.format(virtualenv_name),
+                'source {0}/bin/activate && pyb -v'.format(virtualenv_name)]
 
     if command_prefix:
         expanded_commands = [command_prefix + command for command in commands]
