@@ -1,11 +1,4 @@
-.. figure:: https://travis-ci.org/mriehl/pyb_init.png?branch=master
-   :align: center
-   :alt: Build Status
-
-pyb init
-========
-
-Short script to ease working with the awesome pybuilder.
+|BuildStatus| Short script to ease working with the awesome pybuilder.
 
 What it does
 ============
@@ -20,7 +13,9 @@ needs to be initialized. After checking out the project, you need to
 -  Run pyb to build and test your project.
 
 This program is an attempt at making these routine operations dead
-simple and time-efficient.
+simple and time-efficient. Note that virtual environments are always
+created with the --clear flag, meaning you can run pyb-init to *reset*
+your virtual environment, for example after changing a dependency.
 
 Installation
 ============
@@ -52,3 +47,4 @@ When in the project root, run
 
     pyb-init local
 
+.. |BuildStatus| image:: https://travis-ci.org/mriehl/pyb_init.png?branch=master

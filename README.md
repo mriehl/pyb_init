@@ -1,8 +1,4 @@
-![Build Status](https://travis-ci.org/mriehl/pyb_init.png?branch=master)
-
-pyb init
-========
-
+![BuildStatus](https://travis-ci.org/mriehl/pyb_init.png?branch=master)
 Short script to ease working with the awesome pybuilder.
 
 # What it does
