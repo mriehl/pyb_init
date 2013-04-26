@@ -16,7 +16,7 @@
 #
 #  0. You just DO WHAT THE FUCK YOU WANT TO.
 
-'''
+"""
 Usage:
 pyb-init local [options]
 pyb-init github <user> : <project> [options]
@@ -26,7 +26,7 @@ pyb-init (-h | --help)
 Options:
 -h --help             Show this screen.
 --virtualenv=<name>   Override the virtualenv name [default: venv]
-'''
+"""
 from __future__ import absolute_import
 __version__ = '${version}'
 

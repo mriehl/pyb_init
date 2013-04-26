@@ -19,12 +19,13 @@
 
 from __future__ import absolute_import
 import unittest
-from mockito import when, verify, any as any_value, unstub
+import os
+from mockito import when, any as any_value, unstub
 
 import pyb_init
 from pyb_init.tasks import ShellCommandTask, PreconditionTask
 from pyb_init.reactor import _add_common_tasks, TaskReactor, _add_preconditions
-from pyb_init.configuration import configuration, set_configuration
+from pyb_init.configuration import set_configuration
 
 class ReactorTests(unittest.TestCase):
 
