@@ -47,7 +47,11 @@ class ShellCommandTask(object):
         return self.shell_command
 
     def execute(self):
-        call_result = subprocess.call(self.shell_command, stderr=sys.stderr, stdout=sys.stdout, shell=True,  executable='/bin/bash')
+        call_result = subprocess.call(self.shell_command,
+                                      stderr=sys.stderr,
+                                      stdout=sys.stdout,
+                                      shell=True,
+                                      executable='/bin/bash')
         if call_result != 0 and not self.ignore_failures:
             raise ShellCommandTaskException('Call "{0}" exited with nonzero value {1}.'.format(self.shell_command,
                                                                                                call_result))
