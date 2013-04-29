@@ -41,7 +41,7 @@ class ShellCommandTaskTests(unittest.TestCase):
         task = ShellCommandTask('ls -l')
         task.execute()
 
-        self.assertEqual(call('ls -l', shell=True, stderr=tasks.sys.stderr, stdout=tasks.sys.stdout), mock_call.call_args)
+        self.assertEqual(call('ls -l', shell=True, stderr=tasks.sys.stderr, stdout=tasks.sys.stdout, executable='/bin/bash'), mock_call.call_args)
 
     def test_should_raise_exception_when_shell_call_fails(self):
         when(pyb_init.tasks.subprocess).call(any_value(), stderr=any_value(), stdout=any_value(), shell=any_value()).thenReturn(5)
