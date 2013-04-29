@@ -29,6 +29,10 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
+# Sublime text
+*.sublime-project
+*.sublime-workspace
+
 # commonly used virtualenv names
 ve
 venv
