@@ -12,7 +12,7 @@ After checking out the project, you need to
  - Run pyb to build and test your project.
 
 This program is an attempt at making these routine operations dead simple and time-efficient.
-Note that virtual environments are always created with the --clear flag, meaning you can run pyb-init to *reset* your virtual environment, for example after changing a dependency.
+Note that virtual environments are always created with the --clear flag, meaning you can run pyb-init to reset your virtual environment, for example after changing a dependency.
 
 # Installation
 ```
