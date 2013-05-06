@@ -1,4 +1,16 @@
-|BuildStatus| Short script to ease working with the awesome pybuilder.
+.. image:: https://travis-ci.org/mriehl/pyb_init.png?branch=master
+   :alt: Travis build status image
+   :align: left
+   :target: https://travis-ci.org/mriehl/pyb_init
+
+.. image:: https://pypip.in/v/pyb_init/badge.png
+    :target: https://crate.io/packages/pyb_init/
+    :alt: Latest PyPI version
+
+.. image:: https://pypip.in/d/pyb_init/badge.png
+    :target: https://crate.io/packages/pyb_init/
+    :alt: Number of PyPI downloads
+
 
 What it does
 ============
