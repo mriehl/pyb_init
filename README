@@ -59,4 +59,7 @@ When in the project root, run
 
     pyb-init local
 
-.. |BuildStatus| image:: https://travis-ci.org/mriehl/pyb_init.png?branch=master
+License
+=======
+
+pyb_init is licensed under the terms of the Do What The Fuck You Want To public license.
