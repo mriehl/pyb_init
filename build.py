@@ -35,7 +35,7 @@ license = 'WTFPL'
 name = 'pyb_init'
 url = 'https://github.com/mriehl/pyb_init'
 summary = 'pybuilder project initialization'
-version = '0.1.12'
+version = '0.1.13'
 
 default_task = ['analyze', 'publish']
 
