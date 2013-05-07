@@ -108,6 +108,28 @@ class PybInitTests(unittest.TestCase):
 
         self.assertEqual(configuration['virtualenv_name'], 'foobar')
 
+    def test_should_configure_system_site_packages_when_option_is_provided(self):
+        when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
+                                                                                'github': False,
+                                                                                'git': False,
+                                                                                '-s': True,
+                                                                                '--virtualenv': 'venv'})
+
+        entry_point()
+
+        self.assertTrue(configuration['virtualenv_use_system_site_packages'])
+
+    def test_should_not_configure_system_site_packages_when_option_is_not_provided(self):
+        when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
+                                                                                'github': False,
+                                                                                'git': False,
+                                                                                '-s': False,
+                                                                                '--virtualenv': 'venv'})
+
+        entry_point()
+
+        self.assertFalse(configuration['virtualenv_use_system_site_packages'])
+
     def test_should_eat_exceptions_and_output_error_message_instead(self):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,

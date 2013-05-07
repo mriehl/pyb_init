@@ -48,7 +48,10 @@ def for_git_clone(git_url):
 def _add_common_tasks(reactor, command_prefix, project=None):
     virtualenv_name = configuration['virtualenv_name']
     _add_preconditions(reactor, project)
-    commands = ['virtualenv {0} --clear'.format(virtualenv_name),
+    virtualenv_command = 'virtualenv {0} --clear'.format(virtualenv_name)
+    if configuration['virtualenv_use_system_site_packages']:
+        virtualenv_command += ' --system-site-packages'
+    commands = [virtualenv_command,
                 'source {0}/bin/activate && pip install pybuilder'.format(virtualenv_name),
                 'source {0}/bin/activate && pyb install_dependencies'.format(virtualenv_name),
                 'source {0}/bin/activate && pyb -v'.format(virtualenv_name)]

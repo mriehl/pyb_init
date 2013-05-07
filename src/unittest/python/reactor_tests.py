@@ -57,6 +57,19 @@ class ReactorTests(unittest.TestCase):
                                         ShellCommandTask('cd project1 && source virtualenv/bin/activate && pyb -v')
                                         ])
 
+    def test_should_respect_system_site_packages_configuration(self):
+        when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
+        set_configuration(virtualenv_name='virtualenv', virtualenv_use_system_site_packages=True)
+        reactor = pyb_init.reactor.for_github_clone(user='user1', project='project1')
+        actual_tasks = reactor.get_tasks()
+
+        self.assertEqual(actual_tasks, [ShellCommandTask('git clone https://github.com/user1/project1'),
+                                        ShellCommandTask('cd project1 && virtualenv virtualenv --clear --system-site-packages'),
+                                        ShellCommandTask('cd project1 && source virtualenv/bin/activate && pip install pybuilder'),
+                                        ShellCommandTask('cd project1 && source virtualenv/bin/activate && pyb install_dependencies'),
+                                        ShellCommandTask('cd project1 && source virtualenv/bin/activate && pyb -v')
+                                        ])
+
     def test_should_return_reactor_for_git_clone(self):
         when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
         when(pyb_init.reactor).determine_project_name_from_git_url(any_value()).thenReturn('test')

@@ -26,6 +26,7 @@ pyb-init (-h | --help)
 Options:
 -h --help             Show this screen.
 --virtualenv=<name>   Override the virtualenv name [default: venv]
+-s                    Use system site packages for virtualenv creation
 """
 from __future__ import absolute_import
 __version__ = '${version}'
@@ -42,7 +43,8 @@ logging.basicConfig(format='%(asctime)s | %(levelname)s - %(message)s')
 def entry_point():
     parsed_command_line = docopt(doc=__doc__, version=__version__)
     try:
-        set_configuration(virtualenv_name=parsed_command_line['--virtualenv'])
+        set_configuration(parsed_command_line['--virtualenv'],
+                          parsed_command_line.get('-s', False))
         task_reactor = None
         if parsed_command_line['local']:
             task_reactor = reactor.for_local_initialization()
