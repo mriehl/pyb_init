@@ -24,9 +24,9 @@ pyb-init git <git_url> [options]
 pyb-init (-h | --help)
 
 Options:
--h --help             Show this screen.
---virtualenv=<name>   Override the virtualenv name [default: venv]
--s                    Use system site packages for virtualenv creation
+-h --help                  Show this screen.
+--virtualenv=<name>        Override the virtualenv name [default: venv]
+-s --system-site-packages  Use system site packages for virtualenv creation
 """
 from __future__ import absolute_import
 __version__ = '${version}'
