@@ -107,3 +107,15 @@ class PybInitTests(unittest.TestCase):
         entry_point()
 
         self.assertEqual(configuration['virtualenv_name'], 'foobar')
+
+    def test_should_eat_exceptions_and_output_error_message_instead(self):
+        when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
+                                                                                'github': False,
+                                                                                'git': False,
+                                                                                '--virtualenv': 'foobar'})
+        when(pyb_init.reactor).for_local_initialization().thenRaise(RuntimeError('too fat to fly'))
+        when(pyb_init.logger).error(any_value()).thenReturn(None)
+
+        entry_point()
+
+        verify(pyb_init.logger).error('too fat to fly')

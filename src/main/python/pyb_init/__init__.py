@@ -30,22 +30,29 @@ Options:
 from __future__ import absolute_import
 __version__ = '${version}'
 
+import logging
 from docopt import docopt
 from pyb_init import reactor
 from pyb_init.configuration import set_configuration
 
+logger = logging.getLogger('pyb_init')
+logging.basicConfig(format='%(asctime)s | %(levelname)s - %(message)s')
+
 
 def entry_point():
     parsed_command_line = docopt(doc=__doc__, version=__version__)
-    set_configuration(virtualenv_name=parsed_command_line['--virtualenv'])
-    task_reactor = None
-    if parsed_command_line['local']:
-        task_reactor = reactor.for_local_initialization()
-    if parsed_command_line['github']:
-        task_reactor = reactor.for_github_clone(user=parsed_command_line['<user>'],
-                                                project=parsed_command_line['<project>'])
-    if parsed_command_line['git']:
-        task_reactor = reactor.for_git_clone(git_url=parsed_command_line['<git_url>'])
+    try:
+        set_configuration(virtualenv_name=parsed_command_line['--virtualenv'])
+        task_reactor = None
+        if parsed_command_line['local']:
+            task_reactor = reactor.for_local_initialization()
+        if parsed_command_line['github']:
+            task_reactor = reactor.for_github_clone(user=parsed_command_line['<user>'],
+                                                    project=parsed_command_line['<project>'])
+        if parsed_command_line['git']:
+            task_reactor = reactor.for_git_clone(git_url=parsed_command_line['<git_url>'])
 
-    for task in task_reactor.get_tasks():
-        task.execute()
+        for task in task_reactor.get_tasks():
+            task.execute()
+    except Exception as exception:
+        logger.error(str(exception))
