@@ -38,7 +38,7 @@ Installation
 
 ::
 
-    sudo pip install pyb-init
+    sudo pip install pyb_init
 
 Checkout from GitHub
 ====================
