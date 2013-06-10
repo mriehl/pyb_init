@@ -27,7 +27,7 @@ Options:
 -h --help                  Show this screen.
 --virtualenv=<name>        Override the virtualenv name [default: venv]
 -s --system-site-packages  Use system site packages for virtualenv creation
--p <path> --python=<path>
+-p <path> --python=<path>  Do not use the system python interpreter, use <path> instead.
 """
 from __future__ import absolute_import
 __version__ = '${version}'
