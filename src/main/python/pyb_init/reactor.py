@@ -64,12 +64,12 @@ def _add_common_tasks(reactor, command_prefix, project=None):
 
 def _apply_configuration(virtualenv_name):
     virtualenv_command = 'virtualenv {0} --clear'.format(virtualenv_name)
-    virtualenv_command = _add_site_packages_switch_if_necessary(virtualenv_command)
+    virtualenv_command = _add_system_site_packages_switch_if_necessary(virtualenv_command)
     virtualenv_command = _add_python_interpreter_switch_if_necessary(virtualenv_command)
     return virtualenv_command
 
 
-def _add_site_packages_switch_if_necessary(virtualenv_command):
+def _add_system_site_packages_switch_if_necessary(virtualenv_command):
     if configuration['virtualenv_use_system_site_packages']:
         virtualenv_command += ' --system-site-packages'
     return virtualenv_command
