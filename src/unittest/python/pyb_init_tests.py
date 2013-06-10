@@ -112,7 +112,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
-                                                                                '-s': True,
+                                                                                '--system-site-packages': True,
                                                                                 '--virtualenv': 'venv'})
 
         entry_point()

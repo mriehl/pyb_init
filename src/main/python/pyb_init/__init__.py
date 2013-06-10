@@ -43,10 +43,9 @@ logging.basicConfig(format='%(asctime)s | %(levelname)s - %(message)s')
 
 def entry_point():
     parsed_command_line = docopt(doc=__doc__, version=__version__)
-
     try:
         set_configuration(parsed_command_line['--virtualenv'],
-                          parsed_command_line.get('-s', False),
+                          parsed_command_line.get('--system-site-packages', False),
                           parsed_command_line.get('--python', None))
         task_reactor = None
         if parsed_command_line['local']:
