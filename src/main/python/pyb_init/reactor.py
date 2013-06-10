@@ -46,11 +46,9 @@ def for_git_clone(git_url):
 
 
 def _add_common_tasks(reactor, command_prefix, project=None):
-    virtualenv_name = configuration['virtualenv_name']
     _add_preconditions(reactor, project)
-    virtualenv_command = 'virtualenv {0} --clear'.format(virtualenv_name)
-    if configuration['virtualenv_use_system_site_packages']:
-        virtualenv_command += ' --system-site-packages'
+    virtualenv_name = configuration['virtualenv_name']
+    virtualenv_command = _apply_configuration(virtualenv_name)
     commands = [virtualenv_command,
                 'source {0}/bin/activate && pip install pybuilder'.format(virtualenv_name),
                 'source {0}/bin/activate && pyb install_dependencies'.format(virtualenv_name),
@@ -62,6 +60,25 @@ def _add_common_tasks(reactor, command_prefix, project=None):
         expanded_commands = commands
     for command in expanded_commands:
         reactor.add_task(ShellCommandTask(command))
+
+
+def _apply_configuration(virtualenv_name):
+    virtualenv_command = 'virtualenv {0} --clear'.format(virtualenv_name)
+    virtualenv_command = _add_site_packages_switch_if_necessary(virtualenv_command)
+    virtualenv_command = _add_python_interpreter_switch_if_necessary(virtualenv_command)
+    return virtualenv_command
+
+
+def _add_site_packages_switch_if_necessary(virtualenv_command):
+    if configuration['virtualenv_use_system_site_packages']:
+        virtualenv_command += ' --system-site-packages'
+    return virtualenv_command
+
+
+def _add_python_interpreter_switch_if_necessary(virtualenv_command):
+    if configuration['virtualenv_path_to_python_interpreter']:
+        virtualenv_command += ' -p {0}'.format(configuration['virtualenv_path_to_python_interpreter'])
+    return virtualenv_command
 
 
 def _add_preconditions(reactor, project):

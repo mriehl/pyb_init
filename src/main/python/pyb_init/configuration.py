@@ -19,6 +19,9 @@
 configuration = {}
 
 
-def set_configuration(virtualenv_name, virtualenv_use_system_site_packages=False):
+def set_configuration(virtualenv_name,
+                      virtualenv_use_system_site_packages=False,
+                      python_interpreter=None):
     configuration['virtualenv_name'] = virtualenv_name
     configuration['virtualenv_use_system_site_packages'] = virtualenv_use_system_site_packages
+    configuration['virtualenv_path_to_python_interpreter'] = python_interpreter

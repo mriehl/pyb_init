@@ -105,6 +105,18 @@ class ReactorTests(unittest.TestCase):
                                                ShellCommandTask('source foobar/bin/activate && pyb install_dependencies'),
                                                ShellCommandTask('source foobar/bin/activate && pyb -v')])
 
+    def test_add_common_tasks_should_respect_configured_python_interpreter(self):
+        when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
+        reactor = TaskReactor()
+
+        set_configuration('venv', python_interpreter='/foo/bar')
+        _add_common_tasks(reactor=reactor, command_prefix=None)
+
+        self.assertEqual(reactor.get_tasks(), [ShellCommandTask('virtualenv venv --clear -p /foo/bar'),
+                                               ShellCommandTask('source venv/bin/activate && pip install pybuilder'),
+                                               ShellCommandTask('source venv/bin/activate && pyb install_dependencies'),
+                                               ShellCommandTask('source venv/bin/activate && pyb -v')])
+
     def test_add_common_tasks_should_add_prefixed_commands_when_prefix_is_given(self):
         when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
         reactor = TaskReactor()
