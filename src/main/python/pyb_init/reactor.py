@@ -102,7 +102,6 @@ def _add_preconditions(reactor, project):
     reactor.ensure_command_callable('virtualenv')
 
 
-
 class TaskReactor(object):
 
     def __init__(self):

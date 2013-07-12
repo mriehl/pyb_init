@@ -135,7 +135,7 @@ class ReactorTests(unittest.TestCase):
         _add_preconditions(reactor, None)
 
         self.assertEqual(reactor.get_tasks(), [PreconditionTask(lambda: os.path.exists('build.py'), 'Build descriptor (build.py) should exist'),
-                                               PreconditionTask(lambda: None, 'Virtualenv should be installed and callable')])
+                                               PreconditionTask(lambda: None, 'virtualenv should be installed and callable')])
 
     def test_should_add_preconditions_on_foreign_project(self):
         reactor = TaskReactor()
@@ -143,7 +143,7 @@ class ReactorTests(unittest.TestCase):
 
         self.assertEqual(reactor.get_tasks(), [
                                                 PreconditionTask(lambda: os.path.exists('project/build.py'), 'Build descriptor (project/build.py) should exist'),
-                                                PreconditionTask(lambda: None, 'Virtualenv should be installed and callable')])
+                                                PreconditionTask(lambda: None, 'virtualenv should be installed and callable')])
 
     def test_should_return_reactor_for_svn_checkout(self):
         when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
