@@ -54,6 +54,13 @@ Git checkout
 
     pyb-init git GIT_URL
 
+SVN checkout
+============
+
+::
+
+    pyb-init svn SVN_URL
+
 Initialization from local project
 =================================
 
