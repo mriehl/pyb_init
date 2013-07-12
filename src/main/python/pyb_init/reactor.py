@@ -38,7 +38,8 @@ def for_github_clone(user, project):
 def for_svn_checkout(svn_url):
     reactor = TaskReactor()
     reactor.ensure_command_callable('svn')
-    reactor.add_task(ShellCommandTask('svn checkout {0}'.format(svn_url)))
+    project = determine_project_name_from_svn_url(svn_url)
+    reactor.add_task(ShellCommandTask('svn checkout {0} {1}'.format(svn_url, project)))
     project = determine_project_name_from_svn_url(svn_url)
     _add_common_tasks(reactor, 'cd {0} && '.format(project), project)
     return reactor

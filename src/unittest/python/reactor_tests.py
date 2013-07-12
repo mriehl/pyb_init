@@ -150,7 +150,7 @@ class ReactorTests(unittest.TestCase):
         reactor = pyb_init.reactor.for_svn_checkout(svn_url='http://code/foo/bar')
         actual_tasks = reactor.get_tasks()
         self.assertEqual(actual_tasks, [PreconditionTask('command -v svn', 'svn should be installed and callable'),
-                                        ShellCommandTask('svn checkout http://code/foo/bar'),
+                                        ShellCommandTask('svn checkout http://code/foo/bar bar'),
                                         ShellCommandTask('cd bar && virtualenv virtualenv --clear'),
                                         ShellCommandTask('cd bar && source virtualenv/bin/activate && pip install pybuilder'),
                                         ShellCommandTask('cd bar && source virtualenv/bin/activate && pyb install_dependencies'),
