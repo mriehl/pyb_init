@@ -28,7 +28,6 @@ use_plugin('python.coverage')
 use_plugin('python.distutils')
 use_plugin('python.unittest')
 use_plugin('python.flake8')
-use_plugin('python.pydev')
 
 authors = [Author('Maximilien Riehl', 'maximilien.riehl@gmail.com')]
 license = 'WTFPL'
