@@ -49,7 +49,8 @@ class ReactorTests(unittest.TestCase):
         reactor = pyb_init.reactor.for_github_clone(user='user1', project='project1')
         actual_tasks = reactor.get_tasks()
 
-        self.assertEqual(actual_tasks, [ShellCommandTask('git clone https://github.com/user1/project1'),
+        self.assertEqual(actual_tasks, [PreconditionTask('command -v git', 'git should be installed and callable'),
+                                        ShellCommandTask('git clone https://github.com/user1/project1'),
                                         ShellCommandTask('cd project1 && virtualenv virtualenv --clear'),
                                         ShellCommandTask('cd project1 && source virtualenv/bin/activate && pip install pybuilder'),
                                         ShellCommandTask('cd project1 && source virtualenv/bin/activate && pyb install_dependencies'),
@@ -62,7 +63,8 @@ class ReactorTests(unittest.TestCase):
         reactor = pyb_init.reactor.for_github_clone(user='user1', project='project1')
         actual_tasks = reactor.get_tasks()
 
-        self.assertEqual(actual_tasks, [ShellCommandTask('git clone https://github.com/user1/project1'),
+        self.assertEqual(actual_tasks, [PreconditionTask('command -v git', 'git should be installed and callable'),
+                                        ShellCommandTask('git clone https://github.com/user1/project1'),
                                         ShellCommandTask('cd project1 && virtualenv virtualenv --clear --system-site-packages'),
                                         ShellCommandTask('cd project1 && source virtualenv/bin/activate && pip install pybuilder'),
                                         ShellCommandTask('cd project1 && source virtualenv/bin/activate && pyb install_dependencies'),
@@ -75,7 +77,8 @@ class ReactorTests(unittest.TestCase):
         reactor = pyb_init.reactor.for_git_clone(git_url='https://git/test.git')
         actual_tasks = reactor.get_tasks()
 
-        self.assertEqual(actual_tasks, [ShellCommandTask('git clone https://git/test.git'),
+        self.assertEqual(actual_tasks, [PreconditionTask('command -v git', 'git should be installed and callable'),
+                                        ShellCommandTask('git clone https://git/test.git'),
                                         ShellCommandTask('cd test && virtualenv virtualenv --clear'),
                                         ShellCommandTask('cd test && source virtualenv/bin/activate && pip install pybuilder'),
                                         ShellCommandTask('cd test && source virtualenv/bin/activate && pyb install_dependencies'),

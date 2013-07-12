@@ -46,6 +46,7 @@ def for_svn_checkout(svn_url):
 
 def for_git_clone(git_url):
     reactor = TaskReactor()
+    reactor.ensure_command_callable('git')
     reactor.add_task(ShellCommandTask('git clone {0}'.format(git_url)))
     project = determine_project_name_from_git_url(git_url)
     _add_common_tasks(reactor=reactor,
