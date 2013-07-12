@@ -114,7 +114,8 @@ class TaskReactor(object):
         self.tasks.append(task)
 
     def ensure_command_callable(self, command):
-        command_available_if_0 = ShellCommandTask('command -v {0} > /dev/null 2>&1'.format(command), ignore_failures=True).execute
+        command_available_if_0 = ShellCommandTask('command -v {0} > /dev/null 2>&1'.format(command),
+                                                  ignore_failures=True).execute
         self.add_task(PreconditionTask(
             lambda: command_available_if_0() == 0,
             '{0} should be installed and callable'.format(command)))
