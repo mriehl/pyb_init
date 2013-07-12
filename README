@@ -84,6 +84,11 @@ Also, you can include your systems's site-packages in the virtualenv (for OS-pac
 
     -s
 
+or
+::
+
+   --system-site-packages
+
 License
 =======
 
