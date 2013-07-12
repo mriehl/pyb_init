@@ -80,11 +80,7 @@ You can override the default name of the virtualenv with
     --virtualenv-name=<name>
 
 Also, you can include your systems's site-packages in the virtualenv (for OS-packaged bindings like YUM, etc..) with the flag
-::
 
-    -s
-
-or
 ::
 
    --system-site-packages
