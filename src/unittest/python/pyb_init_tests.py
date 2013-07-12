@@ -38,11 +38,13 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init.reactor).for_local_initialization().thenReturn(mock_reactor)
         when(pyb_init.reactor).for_github_clone(user=any_value(), project=any_value()).thenReturn(mock_reactor)
         when(pyb_init.reactor).for_git_clone(git_url=any_value()).thenReturn(mock_reactor)
+        when(pyb_init.reactor).for_svn_checkout(svn_url=any_value()).thenReturn(mock_reactor)
 
     def test_should_invoke_docopt_with_version_and_docstring(self):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
+                                                                                'svn': False,
                                                                                 '--virtualenv': 'virtualenv'})
 
         entry_point()
@@ -53,6 +55,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
+                                                                                'svn': False,
                                                                                 '--virtualenv': 'virtualenv'})
 
         entry_point()
@@ -63,6 +66,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': False,
                                                                                 'git': False,
                                                                                 'github': True,
+                                                                                'svn': False,
                                                                                 '<user>': 'coder1234',
                                                                                 '<project>': 'committer',
                                                                                 '--virtualenv': 'virtualenv'})
@@ -75,6 +79,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': False,
                                                                                 'github': False,
                                                                                 'git': True,
+                                                                                'svn': False,
                                                                                 '<git_url>': 'foo',
                                                                                 '--virtualenv': 'virtualenv'})
 
@@ -86,6 +91,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
+                                                                                'svn': False,
                                                                                 '--virtualenv': 'virtualenv'})
         mock_reactor = mock()
         mock_task_1 = mock()
@@ -102,6 +108,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
+                                                                                'svn': False,
                                                                                 '--virtualenv': 'foobar'})
 
         entry_point()
@@ -112,6 +119,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
+                                                                                'svn': False,
                                                                                 '--system-site-packages': True,
                                                                                 '--virtualenv': 'venv'})
 
@@ -123,6 +131,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
+                                                                                'svn': False,
                                                                                 '-s': False,
                                                                                 '--virtualenv': 'venv'})
 
@@ -134,6 +143,7 @@ class PybInitTests(unittest.TestCase):
         when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': True,
                                                                                 'github': False,
                                                                                 'git': False,
+                                                                                'svn': False,
                                                                                 '--virtualenv': 'foobar'})
         when(pyb_init.reactor).for_local_initialization().thenRaise(RuntimeError('too fat to fly'))
         when(pyb_init.logger).error(any_value()).thenReturn(None)
@@ -141,3 +151,15 @@ class PybInitTests(unittest.TestCase):
         entry_point()
 
         verify(pyb_init.logger).error('too fat to fly')
+
+    def test_should_run_svn_checkout_when_argument_is_given(self):
+        when(pyb_init).docopt(doc=any_value(), version=any_value()).thenReturn({'local': False,
+                                                                                'git': False,
+                                                                                'github': False,
+                                                                                'svn': True,
+                                                                                '<svn_url>': 'http://code/foo/bar',
+                                                                                '--virtualenv': 'virtualenv'})
+
+        entry_point()
+
+        verify(pyb_init.reactor).for_svn_checkout(svn_url='http://code/foo/bar')

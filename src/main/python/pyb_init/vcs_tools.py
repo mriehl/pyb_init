@@ -26,3 +26,12 @@ def determine_project_name_from_git_url(git_url):
         end_index = len(git_url)
 
     return git_url[start_index:end_index]
+
+
+def determine_project_name_from_svn_url(svn_url):
+    parts = svn_url.split('/')
+    final_index = len(parts) - 1
+    final_part = parts[final_index]
+    if final_part != 'trunk':
+        return final_part
+    return parts[final_index - 1]

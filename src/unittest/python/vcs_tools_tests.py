@@ -18,9 +18,10 @@
 
 import unittest
 
-from pyb_init.vcs_tools import determine_project_name_from_git_url
+from pyb_init.vcs_tools import determine_project_name_from_git_url,\
+                               determine_project_name_from_svn_url
 
-class VcsToolsTests(unittest.TestCase):
+class GitUrlToolsTests(unittest.TestCase):
 
     def test_should_return_project_name_for_git_url_with_git_ending(self):
         actual_project_name = determine_project_name_from_git_url('https://git/test.git')
@@ -41,3 +42,14 @@ class VcsToolsTests(unittest.TestCase):
     def test_should_return_project_name_for_git_read_only_url(self):
         actual_project_name = determine_project_name_from_git_url('git://github.com/mriehl/pyb_init.git')
         self.assertEqual(actual_project_name, 'pyb_init')
+
+
+class SvnUrlToolsTests(unittest.TestCase):
+
+    def test_should_return_project_name_for_svn_url(self):
+        actual_project_name = determine_project_name_from_svn_url('https://svn/test')
+        self.assertEqual(actual_project_name, 'test')
+
+    def test_should_return_project_name_for_svn_url_ending_in_trunk(self):
+        actual_project_name = determine_project_name_from_svn_url('https://svn/test/trunk')
+        self.assertEqual(actual_project_name, 'test')

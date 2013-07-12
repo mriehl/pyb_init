@@ -141,3 +141,15 @@ class ReactorTests(unittest.TestCase):
         self.assertEqual(reactor.get_tasks(), [
                                                 PreconditionTask(lambda: os.path.exists('project/build.py'), 'Build descriptor (project/build.py) should exist'),
                                                 PreconditionTask(lambda: None, 'Virtualenv should be installed and callable')])
+
+    def test_should_return_reactor_for_svn_checkout(self):
+        when(pyb_init.reactor)._add_preconditions(any_value(), any_value()).thenReturn(None)
+        reactor = pyb_init.reactor.for_svn_checkout(svn_url='http://code/foo/bar')
+        actual_tasks = reactor.get_tasks()
+        self.assertEqual(actual_tasks, [PreconditionTask('command -v svn', 'svn should be installed and callable'),
+                                        ShellCommandTask('svn checkout http://code/foo/bar'),
+                                        ShellCommandTask('cd bar && virtualenv virtualenv --clear'),
+                                        ShellCommandTask('cd bar && source virtualenv/bin/activate && pip install pybuilder'),
+                                        ShellCommandTask('cd bar && source virtualenv/bin/activate && pyb install_dependencies'),
+                                        ShellCommandTask('cd bar && source virtualenv/bin/activate && pyb -v')
+                                        ])

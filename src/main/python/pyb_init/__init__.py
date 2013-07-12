@@ -21,6 +21,7 @@ Usage:
 pyb-init local [options]
 pyb-init github <user> : <project> [options]
 pyb-init git <git_url> [options]
+pyb-init svn <svn_url> [options]
 pyb-init (-h | --help)
 
 Options:
@@ -55,8 +56,11 @@ def entry_point():
                                                     project=parsed_command_line['<project>'])
         if parsed_command_line['git']:
             task_reactor = reactor.for_git_clone(git_url=parsed_command_line['<git_url>'])
+        if parsed_command_line['svn']:
+            task_reactor = reactor.for_svn_checkout(svn_url=parsed_command_line['<svn_url>'])
 
         for task in task_reactor.get_tasks():
             task.execute()
+
     except Exception as exception:
         logger.error(str(exception))

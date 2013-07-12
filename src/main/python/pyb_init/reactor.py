@@ -20,7 +20,7 @@ from __future__ import absolute_import
 import os
 
 from pyb_init.tasks import ShellCommandTask, PreconditionTask
-from pyb_init.vcs_tools import determine_project_name_from_git_url
+from pyb_init.vcs_tools import determine_project_name_from_git_url, determine_project_name_from_svn_url
 from pyb_init.configuration import configuration
 
 
@@ -33,6 +33,15 @@ def for_local_initialization():
 def for_github_clone(user, project):
     git_url = 'https://github.com/{0}/{1}'.format(user, project)
     return for_git_clone(git_url)
+
+
+def for_svn_checkout(svn_url):
+    reactor = TaskReactor()
+    reactor.ensure_command_callable('svn')
+    reactor.add_task(ShellCommandTask('svn checkout {0}'.format(svn_url)))
+    project = determine_project_name_from_svn_url(svn_url)
+    _add_common_tasks(reactor, 'cd {0} && '.format(project), project)
+    return reactor
 
 
 def for_git_clone(git_url):
@@ -105,3 +114,9 @@ class TaskReactor(object):
 
     def add_task(self, task):
         self.tasks.append(task)
+
+    def ensure_command_callable(self, command):
+        command_available_if_0 = ShellCommandTask('command -v {0}'.format(command), ignore_failures=True).execute
+        self.add_task(PreconditionTask(
+            lambda: command_available_if_0() == 0,
+            '{0} should be installed and callable'.format(command)))
