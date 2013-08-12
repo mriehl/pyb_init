@@ -47,16 +47,17 @@ def set_properties(project):
     project.build_depends_on('mockito')
     project.build_depends_on('mock')
 
-    project.get_property('filter_resources_glob').append('**/pyb_init/__init__.py')
+    project.get_property('filter_resources_glob').append(
+        '**/pyb_init/__init__.py')
     project.set_property('copy_resources_target', '$dir_dist')
     project.get_property('copy_resources_glob').append('README')
 
     project.set_property('coverage_break_build', True)
     project.set_property('distutils_classifiers', [
-          'Development Status :: 4 - Beta',
-          'Intended Audience :: Developers',
-          'License :: Freely Distributable',
-          'Programming Language :: Python',
-          'Natural Language :: English',
-          'Operating System :: Unix',
-          'Topic :: Software Development :: Build Tools'])
+                         'Development Status :: 4 - Beta',
+                         'Intended Audience :: Developers',
+                         'License :: Freely Distributable',
+                         'Programming Language :: Python',
+                         'Natural Language :: English',
+                         'Operating System :: Unix',
+                         'Topic :: Software Development :: Build Tools'])
