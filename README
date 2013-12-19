@@ -3,13 +3,9 @@
    :align: left
    :target: https://travis-ci.org/mriehl/pyb_init
 
-.. image:: https://pypip.in/v/pyb_init/badge.png
-    :target: https://crate.io/packages/pyb_init/
+.. image:: https://badge.fury.io/py/pyb_init.png
+    :target: https://badge.fury.io/py/pyb_init
     :alt: Latest PyPI version
-
-.. image:: https://pypip.in/d/pyb_init/badge.png
-    :target: https://crate.io/packages/pyb_init/
-    :alt: Number of PyPI downloads
 
 .. image:: http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png
     :target: http://www.wtfpl.net
