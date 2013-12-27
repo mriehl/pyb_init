@@ -43,7 +43,7 @@ default_task = ['analyze', 'publish']
 def set_properties(project):
     project.depends_on('docopt')
 
-    project.build_depends_on('mockito')
+    project.build_depends_on('mockito-without-hardcoded-distribute-version')
     project.build_depends_on('mock')
 
     project.get_property('filter_resources_glob').append(
