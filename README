@@ -15,7 +15,7 @@
 What it does
 ============
 
-When using the `pybuilder <http://pybuilder.github.com>`_, every project
+When using the `PyBuilder <http://pybuilder.github.io>`_, every project
 needs to be initialized. After checking out the project, you need to
 
 -  Create a virtual environment.
